@@ -1,0 +1,93 @@
+ext {
+    //Libraries
+    daggerVersion = '2.0'
+    butterKnifeVersion = '7.0.1'
+    recyclerViewVersion = '21.0.3'
+    rxJavaVersion = '1.0.14'
+    rxAndroidVersion = '1.0.1'
+    rxAndroidBindingVersion = '0.2.0'
+    appcompatVersion = '23.0.0'
+    javaxAnnotationVersion = '3.1.1'
+    mosbyVersion = '1.3.1'
+    fragmentargsVersion = "2.1.2"
+    retrofitVersion = "2.0.0-beta1"
+    guavaVersion = "18.0"
+    stethoVersion = "1.1.1"
+    eventbusVersion = "3.0.0-beta1"
+    gsonVersin = "2.3.1"
+    leakCanaryVersion = "1.3.1"
+    xlogVersion = "2.1.1"
+    timberVersion = "3.1.0"
+    storioVersion = "1.3.0"
+
+    //Testing
+    robolectricVersion = '3.0'
+    jUnitVersion = '4.12'
+    assertJVersion = '1.7.1'
+    mockitoVersion = '1.9.5'
+    dexmakerVersion = '1.0'
+    espressoVersion = '2.0'
+    testingSupportLibVersion = '0.1'
+
+    appDependencies = [
+            daggerCompiler         : "com.google.dagger:dagger-compiler:${daggerVersion}",
+            dagger                 : "com.google.dagger:dagger:${daggerVersion}",
+            javaxAnnotation        : "org.glassfish:javax.annotation:${javaxAnnotationVersion}",
+            rxJava                 : "io.reactivex:rxjava:${rxJavaVersion}",
+            rxBinding              : "com.jakewharton.rxbinding:rxbinding:${rxAndroidBindingVersion}",
+            rxBindingSupportV4     : "com.jakewharton.rxbinding:rxbinding-support-v4:${rxAndroidBindingVersion}",
+            rxBindingAppcompatV7   : "com.jakewharton.rxbinding:rxbinding-appcompat-v7:${rxAndroidBindingVersion}",
+            rxBindingRecyclerviewV7: "com.jakewharton.rxbinding:rxbinding-recyclerview-v7:${rxAndroidBindingVersion}",
+            fragmentargs           : "com.hannesdorfmann.fragmentargs:processor:${fragmentargsVersion}",
+            appcompat              : "com.android.support:appcompat-v7:${appcompatVersion}",
+            stetho                 : "com.facebook.stetho:stetho:${stethoVersion}",
+            leakCanary             : "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}",
+            leakCanaryNoOp         : "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}",
+            xlogCompiler           : "com.github.promeg:xlog-compiler:${xlogVersion}",
+            xlog                   : "com.github.promeg:xlog-android:${xlogVersion}",
+            xlogNoOp               : "com.github.promeg:xlog-android-idle:${xlogVersion}"
+    ]
+
+    modelDependencies = [
+            daggerCompiler  : "com.google.dagger:dagger-compiler:${daggerVersion}",
+            dagger          : "com.google.dagger:dagger:${daggerVersion}",
+            javaxAnnotation : "org.glassfish:javax.annotation:${javaxAnnotationVersion}",
+            rxJava          : "io.reactivex:rxjava:${rxJavaVersion}",
+            retrofit        : "com.squareup.retrofit:retrofit:${retrofitVersion}",
+            retrofitGson    : "com.squareup.retrofit:converter-gson:${retrofitVersion}",
+            retrofitRx      : "com.squareup.retrofit:adapter-rxjava:${retrofitVersion}",
+            stethoOkhttp    : "com.facebook.stetho:stetho-okhttp:${stethoVersion}",
+            storio          : "com.pushtorefresh.storio:sqlite:${storioVersion}",
+            storioAnnotation: "com.pushtorefresh.storio:sqlite-annotations:${storioVersion}",
+
+    ]
+
+    commonDependencies = [
+            daggerCompiler   : "com.google.dagger:dagger-compiler:${daggerVersion}",
+            dagger           : "com.google.dagger:dagger:${daggerVersion}",
+            javaxAnnotation  : "org.glassfish:javax.annotation:${javaxAnnotationVersion}",
+            rxJava           : "io.reactivex:rxjava:${rxJavaVersion}",
+            mosbyCore        : "com.hannesdorfmann.mosby:core:${mosbyVersion}",
+            rxAndroid        : "io.reactivex:rxandroid:${rxAndroidVersion}",
+            mosbyMvp         : "com.hannesdorfmann.mosby:mvp:${mosbyVersion}",
+            appcompat        : "com.android.support:appcompat-v7:${appcompatVersion}",
+            guava            : "com.google.guava:guava:${guavaVersion}",
+            eventbus         : "de.greenrobot:eventbus:${eventbusVersion}",
+            eventbusProcessor: "de.greenrobot:eventbus-annotation-processor:${eventbusVersion}",
+            gson             : "com.google.code.gson:gson:${gsonVersin}",
+            timber           : "com.jakewharton.timber:timber:${timberVersion}"
+
+    ]
+
+    appTestDependencies = [
+            junit  : "junit:junit:${jUnitVersion}",
+            mockito: "org.mockito:mockito-core:${mockitoVersion}",
+    ]
+
+    modelTestDependencies = [
+            junit      : "junit:junit:${jUnitVersion}",
+            assertj    : "org.assertj:assertj-core:${assertJVersion}",
+            mockito    : "org.mockito:mockito-core:${mockitoVersion}",
+            robolectric: "org.robolectric:robolectric:${robolectricVersion}",
+    ]
+}

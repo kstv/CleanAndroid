@@ -1,0 +1,76 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.android.databinding'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'me.tatarka.retrolambda'
+
+android {
+    compileSdkVersion COMPILE_SDK_VERSION as int
+    buildToolsVersion BUILD_TOOLS_VERSION
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+
+    defaultConfig {
+        applicationId "com.github.promeg.doubanmovie"
+        minSdkVersion MIN_SDK_VERSION as int
+        targetSdkVersion TARGET_SDK_VERSION as int
+        versionCode VERSION_CODE as int
+        versionName VERSION_NAME
+
+        buildConfigField "boolean", "XLOG_ENABLED", "true"
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
+
+    dexOptions {
+        incremental true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    def appDependencies = rootProject.ext.appDependencies
+    def appTestDependencies = rootProject.ext.appTestDependencies
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile project(':model')
+
+    apt appDependencies.fragmentargs
+
+    provided appDependencies.daggerCompiler
+    provided appDependencies.javaxAnnotation
+
+    compile appDependencies.dagger
+    compile appDependencies.rxJava
+    compile appDependencies.rxBinding
+    compile appDependencies.rxBindingAppcompatV7
+    compile appDependencies.rxBindingRecyclerviewV7
+    compile appDependencies.appcompat
+    compile appDependencies.leakCanary
+
+    debugCompile appDependencies.xlog
+    debugCompile appDependencies.xlogCompiler
+
+    releaseCompile appDependencies.xlogNoOp
+
+    testCompile appTestDependencies.junit
+    testCompile appTestDependencies.mockito
+}

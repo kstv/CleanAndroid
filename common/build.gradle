@@ -1,0 +1,40 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.neenbedankt.android-apt'
+
+android {
+    compileSdkVersion COMPILE_SDK_VERSION as int
+    buildToolsVersion BUILD_TOOLS_VERSION
+
+    defaultConfig {
+        minSdkVersion MIN_SDK_VERSION as int
+        targetSdkVersion TARGET_SDK_VERSION as int
+        versionCode VERSION_CODE as int
+        versionName VERSION_NAME
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    def commonDependencies = rootProject.ext.commonDependencies
+
+    provided commonDependencies.daggerCompiler
+    provided commonDependencies.javaxAnnotation
+    provided commonDependencies.eventbusProcessor
+
+    compile commonDependencies.dagger
+    compile commonDependencies.rxJava
+    compile commonDependencies.mosbyCore
+    compile commonDependencies.rxAndroid
+    compile commonDependencies.mosbyMvp
+    compile commonDependencies.appcompat
+    compile commonDependencies.eventbus
+    compile commonDependencies.gson
+    compile commonDependencies.guava
+    compile commonDependencies.timber
+}
