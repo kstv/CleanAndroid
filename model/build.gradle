@@ -31,6 +31,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
     def modelDependencies = rootProject.ext.modelDependencies
+    def modelTestDependencies = rootProject.ext.modelTestDependencies
 
     compile project(':common')
 
@@ -46,6 +47,12 @@ dependencies {
     compile modelDependencies.storio
     compile modelDependencies.storioAnnotation
 
-    compile 'com.github.frankiesardo:auto-parcel:0.3'
-    apt 'com.github.frankiesardo:auto-parcel-processor:0.3'
+    compile modelDependencies.autoParcel
+    apt modelDependencies.autoParcelCompiler
+
+    testCompile modelTestDependencies.autoParcelCompiler
+    testCompile modelTestDependencies.junit
+    testCompile modelTestDependencies.assertj
+    testCompile modelTestDependencies.mockito
+    testCompile modelTestDependencies.robolectric
 }

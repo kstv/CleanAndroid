@@ -19,6 +19,7 @@ ext {
     xlogVersion = "2.1.1"
     timberVersion = "3.1.0"
     storioVersion = "1.3.0"
+    autoParcelVersion = "0.3"
 
     //Testing
     robolectricVersion = '3.0'
@@ -49,34 +50,37 @@ ext {
     ]
 
     modelDependencies = [
-            daggerCompiler  : "com.google.dagger:dagger-compiler:${daggerVersion}",
-            dagger          : "com.google.dagger:dagger:${daggerVersion}",
-            javaxAnnotation : "org.glassfish:javax.annotation:${javaxAnnotationVersion}",
-            rxJava          : "io.reactivex:rxjava:${rxJavaVersion}",
-            retrofit        : "com.squareup.retrofit:retrofit:${retrofitVersion}",
-            retrofitGson    : "com.squareup.retrofit:converter-gson:${retrofitVersion}",
-            retrofitRx      : "com.squareup.retrofit:adapter-rxjava:${retrofitVersion}",
-            stethoOkhttp    : "com.facebook.stetho:stetho-okhttp:${stethoVersion}",
-            storio          : "com.pushtorefresh.storio:sqlite:${storioVersion}",
-            storioAnnotation: "com.pushtorefresh.storio:sqlite-annotations:${storioVersion}",
+            daggerCompiler    : "com.google.dagger:dagger-compiler:${daggerVersion}",
+            dagger            : "com.google.dagger:dagger:${daggerVersion}",
+            javaxAnnotation   : "org.glassfish:javax.annotation:${javaxAnnotationVersion}",
+            rxJava            : "io.reactivex:rxjava:${rxJavaVersion}",
+            retrofit          : "com.squareup.retrofit:retrofit:${retrofitVersion}",
+            retrofitGson      : "com.squareup.retrofit:converter-gson:${retrofitVersion}",
+            retrofitRx        : "com.squareup.retrofit:adapter-rxjava:${retrofitVersion}",
+            stethoOkhttp      : "com.facebook.stetho:stetho-okhttp:${stethoVersion}",
+            storio            : "com.pushtorefresh.storio:sqlite:${storioVersion}",
+            storioAnnotation  : "com.pushtorefresh.storio:sqlite-annotations:${storioVersion}",
+            autoParcel        : "com.github.frankiesardo:auto-parcel:${autoParcelVersion}",
+            autoParcelCompiler: "com.github.frankiesardo:auto-parcel-processor:${autoParcelVersion}"
 
     ]
 
     commonDependencies = [
-            daggerCompiler   : "com.google.dagger:dagger-compiler:${daggerVersion}",
-            dagger           : "com.google.dagger:dagger:${daggerVersion}",
-            javaxAnnotation  : "org.glassfish:javax.annotation:${javaxAnnotationVersion}",
-            rxJava           : "io.reactivex:rxjava:${rxJavaVersion}",
-            mosbyCore        : "com.hannesdorfmann.mosby:core:${mosbyVersion}",
-            rxAndroid        : "io.reactivex:rxandroid:${rxAndroidVersion}",
-            mosbyMvp         : "com.hannesdorfmann.mosby:mvp:${mosbyVersion}",
-            appcompat        : "com.android.support:appcompat-v7:${appcompatVersion}",
-            guava            : "com.google.guava:guava:${guavaVersion}",
-            eventbus         : "de.greenrobot:eventbus:${eventbusVersion}",
-            eventbusProcessor: "de.greenrobot:eventbus-annotation-processor:${eventbusVersion}",
-            gson             : "com.google.code.gson:gson:${gsonVersin}",
-            timber           : "com.jakewharton.timber:timber:${timberVersion}"
-
+            daggerCompiler    : "com.google.dagger:dagger-compiler:${daggerVersion}",
+            dagger            : "com.google.dagger:dagger:${daggerVersion}",
+            javaxAnnotation   : "org.glassfish:javax.annotation:${javaxAnnotationVersion}",
+            rxJava            : "io.reactivex:rxjava:${rxJavaVersion}",
+            mosbyCore         : "com.hannesdorfmann.mosby:core:${mosbyVersion}",
+            rxAndroid         : "io.reactivex:rxandroid:${rxAndroidVersion}",
+            mosbyMvp          : "com.hannesdorfmann.mosby:mvp:${mosbyVersion}",
+            appcompat         : "com.android.support:appcompat-v7:${appcompatVersion}",
+            guava             : "com.google.guava:guava:${guavaVersion}",
+            eventbus          : "de.greenrobot:eventbus:${eventbusVersion}",
+            eventbusProcessor : "de.greenrobot:eventbus-annotation-processor:${eventbusVersion}",
+            gson              : "com.google.code.gson:gson:${gsonVersin}",
+            timber            : "com.jakewharton.timber:timber:${timberVersion}",
+            autoParcel        : "com.github.frankiesardo:auto-parcel:${autoParcelVersion}",
+            autoParcelCompiler: "com.github.frankiesardo:auto-parcel-processor:${autoParcelVersion}"
     ]
 
     appTestDependencies = [
@@ -85,9 +89,18 @@ ext {
     ]
 
     modelTestDependencies = [
-            junit      : "junit:junit:${jUnitVersion}",
-            assertj    : "org.assertj:assertj-core:${assertJVersion}",
-            mockito    : "org.mockito:mockito-core:${mockitoVersion}",
-            robolectric: "org.robolectric:robolectric:${robolectricVersion}",
+            junit             : "junit:junit:${jUnitVersion}",
+            assertj           : "org.assertj:assertj-core:${assertJVersion}",
+            mockito           : "org.mockito:mockito-core:${mockitoVersion}",
+            robolectric       : "org.robolectric:robolectric:${robolectricVersion}",
+            autoParcelCompiler: "com.github.frankiesardo:auto-parcel-processor:${autoParcelVersion}"
+    ]
+
+    commonTestDependencies = [
+            junit             : "junit:junit:${jUnitVersion}",
+            assertj           : "org.assertj:assertj-core:${assertJVersion}",
+            mockito           : "org.mockito:mockito-core:${mockitoVersion}",
+            robolectric       : "org.robolectric:robolectric:${robolectricVersion}",
+            autoParcelCompiler: "com.github.frankiesardo:auto-parcel-processor:${autoParcelVersion}"
     ]
 }

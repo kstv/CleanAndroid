@@ -3,6 +3,7 @@ package com.github.promeg.doubanmovie.model.movie;
 import com.promeg.github.doubanmovie.common.utils.gson.AutoGson;
 
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 
 import java.util.List;
 
@@ -26,56 +27,80 @@ import auto.parcel.AutoParcel;
 @AutoGson(autoValueClass = AutoParcel_Movie.class)
 public abstract class Movie implements Parcelable {
 
+    @Nullable
     public abstract Rating rating();
 
+    @Nullable
     public abstract int reviews_count();
 
+    @Nullable
     public abstract int wish_count();
 
+    @Nullable
     public abstract int collect_count();
 
+    @Nullable
     public abstract String douban_site();
 
+    @Nullable
     public abstract String year();
 
+    @Nullable
     public abstract Images images();
 
+    @Nullable
     public abstract String alt();
 
     public abstract Long id();
 
+    @Nullable
     public abstract String mobile_url();
 
     public abstract String title();
 
+    @Nullable
     public abstract int do_count();
 
+    @Nullable
     public abstract int seasons_count();
 
+    @Nullable
     public abstract String schedule_url();
 
+    @Nullable
     public abstract int episodes_count();
 
+    @Nullable
     public abstract int current_season();
 
+    @Nullable
     public abstract String original_title();
 
+    @Nullable
     public abstract String summary();
 
+    @Nullable
     public abstract String subtype();
 
+    @Nullable
     public abstract int comments_count();
 
+    @Nullable
     public abstract int ratings_count();
 
+    @Nullable
     public abstract List<String> genres();
 
+    @Nullable
     public abstract List<String> countries();
 
+    @Nullable
     public abstract List<Casts> casts();
 
+    @Nullable
     public abstract List<Casts> directors();
 
+    @Nullable
     public abstract List<String> aka();
 
     public static Builder builder() {

@@ -17,11 +17,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        test.java.srcDirs += 'build/generated/source/r/debug'
+        test.java.srcDirs += 'build/generated/source/apt/test/debug'
+    }
+
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     def commonDependencies = rootProject.ext.commonDependencies
+    def commonTestDependencies = rootProject.ext.commonTestDependencies
 
     provided commonDependencies.daggerCompiler
     provided commonDependencies.javaxAnnotation
@@ -37,4 +43,12 @@ dependencies {
     compile commonDependencies.gson
     compile commonDependencies.guava
     compile commonDependencies.timber
+    compile commonDependencies.autoParcel
+    apt commonDependencies.autoParcelCompiler
+
+    testCompile commonTestDependencies.autoParcelCompiler
+    testCompile commonTestDependencies.junit
+    testCompile commonTestDependencies.assertj
+    testCompile commonTestDependencies.mockito
+    testCompile commonTestDependencies.robolectric
 }

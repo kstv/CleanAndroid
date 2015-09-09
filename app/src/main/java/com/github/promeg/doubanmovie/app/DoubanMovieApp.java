@@ -2,13 +2,12 @@ package com.github.promeg.doubanmovie.app;
 
 import com.facebook.stetho.Stetho;
 import com.github.promeg.doubanmovie.BuildConfig;
-import com.github.promeg.doubanmovie.ui.main.MainPresenterImpl;
-import com.github.promeg.doubanmovie.utils.AppTestUtils;
 import com.github.promeg.xlog_android.lib.XLogConfig;
 import com.promeg.github.doubanmovie.common.base.IApplication;
 import com.promeg.github.doubanmovie.common.di.AppModule;
 import com.promeg.github.doubanmovie.common.di.ApplicationComponent;
 import com.promeg.github.doubanmovie.common.di.DaggerApplicationComponent;
+import com.promeg.github.doubanmovie.common.utils.test.TestUtils;
 import com.promegu.xlog.base.XLogMethod;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
@@ -55,7 +54,7 @@ public class DoubanMovieApp extends Application implements IApplication {
                                     Stetho.defaultInspectorModulesProvider(this))
                             .build());
 
-        AppTestUtils.setRxSchedulersForUnitTestsIfNeeded();
+        TestUtils.setRxSchedulersForUnitTestsIfNeeded();
 
         LeakCanary.install(this);
 

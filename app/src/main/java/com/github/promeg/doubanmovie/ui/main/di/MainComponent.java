@@ -28,7 +28,5 @@ public interface MainComponent extends ActivityComponent {
 
     void inject(MainActivityFragment fragment);
 
-    void inject(MainPresenterImpl presenter);
-
     MainPresenter presenter();
 }

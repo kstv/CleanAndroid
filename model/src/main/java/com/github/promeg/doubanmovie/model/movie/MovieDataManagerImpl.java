@@ -1,15 +1,18 @@
 package com.github.promeg.doubanmovie.model.movie;
 
 import com.github.promeg.doubanmovie.model.movie.storio.MovieTableMeta;
+import com.promeg.github.doubanmovie.common.utils.Utility;
 import com.promeg.github.doubanmovie.common.utils.visibility.PackagePrivate;
 import com.pushtorefresh.storio.sqlite.StorIOSQLite;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.VisibleForTesting;
 
 import java.util.concurrent.TimeUnit;
 
 import retrofit.http.Path;
 import rx.Observable;
+import rx.Scheduler;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -29,17 +32,21 @@ class MovieDataManagerImpl implements MovieDataManager {
 
     private StorIOSQLite mStorDb;
 
-    private MovieDataManagerImpl(MovieApi api, StorIOSQLite storDb) {
+    private Scheduler mScheduler;
+
+    private MovieDataManagerImpl(MovieApi api, StorIOSQLite storDb, Scheduler scheduler) {
         //no instance
         mApi = api;
         mStorDb = storDb;
+        mScheduler = scheduler;
     }
 
-    public static MovieDataManagerImpl getInstance(@NonNull MovieApi api, @NonNull StorIOSQLite storDb) {
+    public static MovieDataManagerImpl getInstance(@NonNull MovieApi api,
+            @NonNull StorIOSQLite storDb, @NonNull Scheduler scheduler) {
         if (INSTANCE == null) {
             synchronized (MovieDataManagerImpl.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = new MovieDataManagerImpl(api, storDb);
+                    INSTANCE = new MovieDataManagerImpl(api, storDb, scheduler);
                 }
             }
         }
@@ -54,9 +61,6 @@ class MovieDataManagerImpl implements MovieDataManager {
      * 首先从DB中读取并emits缓存数据（如无缓存则返回null），同时请求网络数据
      *
      * 网络数据返回后写入（更新）DB，并emits
-     *
-     * @param id
-     * @return
      */
     @Override
     public Observable<Movie> movie(@Path("id") Long id) {
@@ -65,13 +69,15 @@ class MovieDataManagerImpl implements MovieDataManager {
 
         Observable<Movie> getFromDb = mStorDb.get().listOfObjects(Movie.class).withQuery(
                 MovieTableMeta.queryId(id)).prepare().createObservable()
+                .subscribeOn(mScheduler)
                 .flatMap(movies -> {
                     Movie movie = (movies != null && movies.size() > 0) ? movies.get(0) : null;
                     return Observable.just(movie);
                 });
 
         Observable<Movie> getFromServer = mApi.movie(id)
-                .delay(3, TimeUnit.SECONDS) // 加入3s延迟，方便查看缓存效果
+                .subscribeOn(mScheduler)
+                .delay(3, TimeUnit.SECONDS, mScheduler) // 加入3s延迟，方便查看缓存效果
                 .flatMap(
                         movie -> {
                             // store to db
@@ -90,5 +96,20 @@ class MovieDataManagerImpl implements MovieDataManager {
          * 由于在getFromServer中将最新数据写入了数据库，因此Subscriber仍能监听到改变
          */
         return Observable.merge(getFromDb, getFromServer);
+    }
+
+
+    @VisibleForTesting
+    void setApiForTest(MovieApi movieApi) {
+        if (Utility.isUnderRoboletricTest()) {
+            this.mApi = movieApi;
+        }
+    }
+
+    @VisibleForTesting
+    void setSchedulerForTest(Scheduler scheduler) {
+        if (Utility.isUnderRoboletricTest()) {
+            this.mScheduler = scheduler;
+        }
     }
 }

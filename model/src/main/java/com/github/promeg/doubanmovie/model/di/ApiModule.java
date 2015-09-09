@@ -8,8 +8,13 @@ import com.squareup.okhttp.OkHttpClient;
 
 import android.content.Context;
 
+import javax.inject.Named;
+
 import dagger.Module;
 import dagger.Provides;
+import rx.Scheduler;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by guyacong on 2015/9/4.
@@ -30,5 +35,10 @@ public class ApiModule {
     @Provides
     StorIOSQLite provideStoreIOSQLite (Context context, Gson gson) {
         return StorIOProvider.getStorIO(context, gson);
+    }
+
+    @Provides @Named("io")
+    Scheduler provideIoScheduler(){
+        return Schedulers.io();
     }
 }

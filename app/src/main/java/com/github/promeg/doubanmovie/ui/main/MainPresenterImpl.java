@@ -16,9 +16,9 @@ import rx.schedulers.Schedulers;
 
 public class MainPresenterImpl extends BaseRxPresenter<MainView> implements MainPresenter {
 
-    EventBus mBus;
+    final EventBus mBus;
 
-    MovieDataManager mMovieDataManager;
+    final MovieDataManager mMovieDataManager;
 
     @Inject
     public MainPresenterImpl(EventBus bus, MovieDataManager movieDataManager) {
