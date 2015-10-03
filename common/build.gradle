@@ -41,12 +41,8 @@ dependencies {
     compile commonDependencies.appcompat
     compile commonDependencies.eventbus
     compile commonDependencies.gson
-    compile commonDependencies.guava
     compile commonDependencies.timber
-    compile commonDependencies.autoParcel
-    apt commonDependencies.autoParcelCompiler
 
-    testCompile commonTestDependencies.autoParcelCompiler
     testCompile commonTestDependencies.junit
     testCompile commonTestDependencies.assertj
     testCompile commonTestDependencies.mockito

@@ -8,14 +8,13 @@ import com.pushtorefresh.storio.sqlite.StorIOSQLite;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import retrofit.http.Path;
 import rx.Observable;
 import rx.Scheduler;
-
-import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkNotNull;
+import rx.functions.Func1;
 
 /**
  * Movie数据管理类
@@ -64,28 +63,33 @@ class MovieDataManagerImpl implements MovieDataManager {
      */
     @Override
     public Observable<Movie> movie(@Path("id") Long id) {
-        checkNotNull(id);
-        checkArgument(id > 0);
+        //checkNotNull(id);
+        //checkArgument(id > 0);
 
         Observable<Movie> getFromDb = mStorDb.get().listOfObjects(Movie.class).withQuery(
                 MovieTableMeta.queryId(id)).prepare().createObservable()
                 .subscribeOn(mScheduler)
-                .flatMap(movies -> {
-                    Movie movie = (movies != null && movies.size() > 0) ? movies.get(0) : null;
-                    return Observable.just(movie);
+                .flatMap(new Func1<List<Movie>, Observable<Movie>>() {
+                    @Override
+                    public Observable<Movie> call(List<Movie> movies) {
+                        Movie movie = (movies != null && movies.size() > 0) ? movies.get(0) : null;
+                        return Observable.just(movie);
+                    }
                 });
 
         Observable<Movie> getFromServer = mApi.movie(id)
                 .subscribeOn(mScheduler)
                 .delay(3, TimeUnit.SECONDS, mScheduler) // 加入3s延迟，方便查看缓存效果
-                .flatMap(
-                        movie -> {
-                            // store to db
-                            mStorDb.put().object(movie).prepare().executeAsBlocking();
-                            Movie newMovie = movie.toBuilder().title(movie.title() + " from server")
-                                    .build();
-                            return Observable.just(newMovie);
-                        });
+                .flatMap(new Func1<Movie, Observable<Movie>>() {
+                    @Override
+                    public Observable<Movie> call(Movie movie) {
+                        // store to db
+                        mStorDb.put().object(movie).prepare().executeAsBlocking();
+                        Movie newMovie = movie.toBuilder().title(movie.title() + " from server")
+                                .build();
+                        return Observable.just(newMovie);
+                    }
+                });
 
         /**
          * 不能使用concat操作符

@@ -19,9 +19,12 @@ import android.widget.TextView;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
 import de.greenrobot.event.EventBus;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Timestamped;
+
+import static butterknife.ButterKnife.findById;
 
 public class MainActivityFragment extends BaseFragment<MainView, MainPresenter>
         implements MainView {
@@ -31,10 +34,8 @@ public class MainActivityFragment extends BaseFragment<MainView, MainPresenter>
     @Inject
     EventBus mBus;
 
-    @Bind(R.id.btn_load_movie)
     Button mBtnLoadMovie;
 
-    @Bind(R.id.tv_content)
     TextView mTvContent;
 
     public MainActivityFragment() {
@@ -43,6 +44,8 @@ public class MainActivityFragment extends BaseFragment<MainView, MainPresenter>
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mBtnLoadMovie = findById(view, R.id.btn_load_movie);
+        mTvContent = findById(view, R.id.tv_content);
         initView();
     }
 
@@ -52,8 +55,11 @@ public class MainActivityFragment extends BaseFragment<MainView, MainPresenter>
                 .timestamp()
                 .lift(new TimeWindowFilter<>(Constants.NET_REQUEST_TIME_WINDOW_MILLIS))
                 .subscribeOn(AndroidSchedulers.mainThread())
-                .subscribe(object -> {
-                    presenter.loadMovie(1764796L);
+                .subscribe(new Action1<Timestamped<Object>>() {
+                    @Override
+                    public void call(Timestamped<Object> objectTimestamped) {
+                        presenter.loadMovie(1764796L);
+                    }
                 });
     }
 
