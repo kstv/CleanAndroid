@@ -88,7 +88,7 @@ public class MainActivityFragment extends BaseFragment<MainView, MainPresenter>
     @Override
     public void showMovie(Movie movie) {
         if (movie != null) {
-            mTvContent.setText(movie.title());
+            mTvContent.setText(movie.title() + getResources().getString(com.promeg.github.doubanmovie.common.R.string.test_string));
         }
     }
 }

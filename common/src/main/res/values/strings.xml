@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">common</string>
+    <string name="test_string">test string from common</string>
 </resources>

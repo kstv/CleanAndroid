@@ -36,6 +36,7 @@ android_library(
     ':build-config',
     ':supportv4',
     ':res',
+    ':common-res',
     ':mvp',
     ':core',
     ':rxbinding',
