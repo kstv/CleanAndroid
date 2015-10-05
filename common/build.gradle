@@ -30,7 +30,7 @@ dependencies {
     def commonTestDependencies = rootProject.ext.commonTestDependencies
 
     provided commonDependencies.daggerCompiler
-    provided commonDependencies.javaxAnnotation
+    compile commonDependencies.javaxAnnotation
     provided commonDependencies.eventbusProcessor
 
     compile commonDependencies.dagger

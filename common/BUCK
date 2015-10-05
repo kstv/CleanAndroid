@@ -1,0 +1,40 @@
+android_resource(
+	name = 'res',
+	res = 'src/main/res',
+	package = 'com.promeg.github.doubanmovie.common',
+	visibility = ['//common:src'],
+)
+
+android_library(
+	name = 'src',
+	srcs = glob(['src/main/java/**/*.java']),
+	deps = [
+		':res',
+		'//.okbuck/common:all-jars',
+		'//.okbuck/common:all-aars',
+	],
+	exported_deps = [
+		'//.okbuck/common:all-jars',
+		'//.okbuck/common:all-aars',
+	],
+	visibility = ['PUBLIC'],
+	annotation_processors = [
+		'de.greenrobot.event.annotationprocessor.EventBusAnnotationProcessor',
+		'butterknife.internal.ButterKnifeProcessor',
+		'com.google.auto.service.processor.AutoServiceProcessor',
+		'auto.parcel.processor.AutoParcelProcessor',
+		'auto.parcel.processor.AutoParcelBuilderProcessor',
+		'dagger.internal.codegen.ComponentProcessor',
+	],
+	annotation_processor_deps = [
+		'//.okbuck/common:all-jars',
+		'//.okbuck/common:all-aars',
+		'//.okbuck/annotation_processor_deps:all-jars',
+		'//.okbuck/annotation_processor_deps:all-aars',
+	],
+)
+
+project_config(
+	src_target = '//common:src',
+	src_roots = ['src/main/java'],
+)
