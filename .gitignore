@@ -34,3 +34,6 @@ proguard/
 *.iml
 .idea/
 import-summary.txt
+
+buck-out/
+.buckd/
