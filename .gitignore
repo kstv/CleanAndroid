@@ -38,3 +38,5 @@ import-summary.txt
 buck-out/
 buck-cache/
 .buckd/
+
+.okbuck/

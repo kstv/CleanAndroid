@@ -27,7 +27,6 @@ android_library(
 		'//.okbuck/app:all-aars',
 	],
 	annotation_processors = [
-		'com.promegu.xlog.processor.XLogProcessor',
 		'org.antlr.v4.runtime.misc.RuleDependencyProcessor',
 		'butterknife.internal.ButterKnifeProcessor',
 		'org.antlr.v4.runtime.misc.NullUsageProcessor',
@@ -49,7 +48,6 @@ android_binary(
 	name = 'bin',
 	manifest = 'src/main/AndroidManifest.xml',
 	keystore = '//.okbuck/keystore:app_keystore',
-	package_type = 'debug',
 	deps = [
 		':res',
 		':src',
