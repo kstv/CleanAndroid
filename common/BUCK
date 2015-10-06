@@ -5,11 +5,20 @@ android_resource(
 	visibility = ['//common:src'],
 )
 
+android_build_config(
+	name = 'build_config',
+	package = 'com.promeg.github.doubanmovie.common',
+	values = [
+	],
+	visibility = ['//common:src'],
+)
+
 android_library(
 	name = 'src',
 	srcs = glob(['src/main/java/**/*.java']),
 	deps = [
 		':res',
+		':build_config',
 		'//.okbuck/common:all-jars',
 		'//.okbuck/common:all-aars',
 	],

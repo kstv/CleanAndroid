@@ -1,13 +1,17 @@
-keystore(
-	name = 'app_keystore',
-	store = 'debug.keystore',
-	properties = 'debug.keystore.properties',
-)
-
 android_resource(
 	name = 'res',
 	res = 'src/main/res',
+	assets = 'src/main/assets',
 	package = 'com.github.promeg.doubanmovie',
+	visibility = ['//app:src'],
+)
+
+android_build_config(
+	name = 'build_config',
+	package = 'com.github.promeg.doubanmovie',
+	values = [
+		'boolean XLOG_ENABLED = true',
+	],
 	visibility = ['//app:src'],
 )
 
@@ -16,12 +20,14 @@ android_library(
 	srcs = glob(['src/main/java/**/*.java']),
 	deps = [
 		':res',
+		':build_config',
 		'//common:src',
 		'//model:src',
 		'//.okbuck/app:all-jars',
 		'//.okbuck/app:all-aars',
 	],
 	annotation_processors = [
+		'com.promegu.xlog.processor.XLogProcessor',
 		'org.antlr.v4.runtime.misc.RuleDependencyProcessor',
 		'butterknife.internal.ButterKnifeProcessor',
 		'org.antlr.v4.runtime.misc.NullUsageProcessor',
@@ -42,7 +48,8 @@ android_library(
 android_binary(
 	name = 'bin',
 	manifest = 'src/main/AndroidManifest.xml',
-	keystore = ':app_keystore',
+	keystore = '//.okbuck/keystore:app_keystore',
+	package_type = 'debug',
 	deps = [
 		':res',
 		':src',

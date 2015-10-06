@@ -1,0 +1,6 @@
+keystore(
+	name = 'app_keystore',
+	store = 'app.keystore',
+	properties = 'app.keystore.properties',
+	visibility = ['//app:bin'],
+)
