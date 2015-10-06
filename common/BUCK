@@ -2,7 +2,15 @@ android_resource(
 	name = 'res',
 	res = 'src/main/res',
 	package = 'com.promeg.github.doubanmovie.common',
-	visibility = ['//common:src'],
+	deps = [
+
+		'//.okbuck/common:aar__mvp-1.3.1.aar',
+		'//.okbuck/common:aar__support-v4-23.0.0.aar',
+		'//.okbuck/common:aar__rxandroid-1.0.1.aar',
+		'//.okbuck/common:aar__core-1.3.1.aar',
+		'//.okbuck/common:aar__appcompat-v7-23.0.0.aar',
+	],
+	visibility = ['PUBLIC'],
 )
 
 android_build_config(
@@ -19,12 +27,23 @@ android_library(
 	deps = [
 		':res',
 		':build_config',
+
+
+		'//.okbuck/common:aar__mvp-1.3.1.aar',
+		'//.okbuck/common:aar__support-v4-23.0.0.aar',
+		'//.okbuck/common:aar__rxandroid-1.0.1.aar',
+		'//.okbuck/common:aar__core-1.3.1.aar',
+		'//.okbuck/common:aar__appcompat-v7-23.0.0.aar',
 		'//.okbuck/common:all-jars',
-		'//.okbuck/common:all-aars',
 	],
 	exported_deps = [
+
+		'//.okbuck/common:aar__mvp-1.3.1.aar',
+		'//.okbuck/common:aar__support-v4-23.0.0.aar',
+		'//.okbuck/common:aar__rxandroid-1.0.1.aar',
+		'//.okbuck/common:aar__core-1.3.1.aar',
+		'//.okbuck/common:aar__appcompat-v7-23.0.0.aar',
 		'//.okbuck/common:all-jars',
-		'//.okbuck/common:all-aars',
 	],
 	visibility = ['PUBLIC'],
 	annotation_processors = [

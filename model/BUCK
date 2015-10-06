@@ -2,7 +2,11 @@ android_resource(
 	name = 'res',
 	res = 'src/main/res',
 	package = 'com.github.promeg.doubanmovie.model',
-	visibility = ['//model:src'],
+	deps = [
+		'//common:res',
+
+	],
+	visibility = ['PUBLIC'],
 )
 
 android_build_config(
@@ -19,14 +23,16 @@ android_library(
 	deps = [
 		':res',
 		':build_config',
+
 		'//common:src',
+		'//common:res',
+
 		'//.okbuck/model:all-jars',
-		'//.okbuck/model:all-aars',
 	],
 	exported_deps = [
 		'//common:src',
+
 		'//.okbuck/model:all-jars',
-		'//.okbuck/model:all-aars',
 	],
 	visibility = ['PUBLIC'],
 	annotation_processors = [
