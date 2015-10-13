@@ -42,9 +42,6 @@ class RetrofitProvider {
     }
 
     private RetrofitProvider(Gson gson, OkHttpClient client) {
-
-        client.networkInterceptors().add(new StethoInterceptor());
-
         mRetrofit = new Retrofit.Builder()
                 .baseUrl("https://api.douban.com")
                 .addConverterFactory(GsonConverterFactory.create(gson))
